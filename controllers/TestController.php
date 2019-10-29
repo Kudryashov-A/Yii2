@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Product;
 use yii\web\Controller;
 
@@ -20,8 +21,10 @@ class TestController extends Controller
         $product->category = 'car';
         $product->price = 1000000;
 
-        return $this->render('index',
-            ['var' => 'data', 'product' => $product]);
-//        return $this->render('about');
+        $testResult = Yii::$app->test->getProp();
+
+        return $this->render(   'index',
+            ['var' => 'data', 'product' => $product, 'testResult' => $testResult]
+        );
     }
 }
