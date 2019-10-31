@@ -30,8 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'name',
                 'format' => 'html',
                 'value' => function(\app\models\Product $model) {
-                    return Html::a('<b>' . $model->name . '</b>',
-                                    Url::to('http://myyii.site/product/view?id=' . $model->id));
+                    return Html::a(Html::encode($model->name),
+                                    ['view', 'id' => $model->id]);
+//                                    Url::to('http://myyii.site/product/view?id=' . $model->id));
                 }
             ],
             'price',
