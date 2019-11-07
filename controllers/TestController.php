@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Product;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 class TestController extends Controller
@@ -17,11 +18,14 @@ class TestController extends Controller
     {
         $product = new Product();
         $product->id = 1;
-        $product->name = 'Corolla';
-        $product->category = 'car';
-        $product->price = 1000000;
+        $product->name = '<p>Corolla</p> ';
+//        $product->category = 'car';
+        $product->price = 500;
+        $product->created_at = time();
 
         $testResult = Yii::$app->test->getProp();
+        $product->validate();
+        return VarDumper::dumpAsString($product->validate(), 5, true);
 
         return $this->render(   'index',
             ['var' => 'data', 'product' => $product, 'testResult' => $testResult]
